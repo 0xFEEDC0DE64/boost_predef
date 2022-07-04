@@ -4,6 +4,8 @@
 # See accompanying file LICENSE_1_0.txt or copy at
 # http://www.boost.org/LICENSE_1_0.txt
 
+if(NOT DEFINED IDF_TARGET)
+
 # NOTE:
 #   CMake support for Boost.Predef is currently experimental at best and the
 #   interface is likely to change in the future
@@ -36,3 +38,13 @@ target_include_directories( boost_predef INTERFACE include )
 # Add an alias to be compatible with consumers that may have used the
 # FindBoost script.
 add_library( Boost::predef ALIAS boost_predef )
+
+else()
+
+idf_component_register(
+    INCLUDE_DIRS
+        include
+)
+
+endif()
+
